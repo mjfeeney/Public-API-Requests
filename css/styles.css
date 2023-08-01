@@ -262,4 +262,15 @@ header h1 {
 }
 
 
+/* ===================================== 
+   My Custom CSS
+======================================== */
 
+.hidden {
+    display: none;
+}
+
+.modal-info-container img {
+    outline: solid black 4px;
+    border: solid white 5px;
+}
