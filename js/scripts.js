@@ -18,6 +18,8 @@ function fetchData(url) {
   fetchData('https://randomuser.me/api/?results=12&nat=us')
     .then(data => generateCard(data.results))
     .then(modals)
+    .then(searchBar)
+    
         
            
    
@@ -134,9 +136,6 @@ function generateCard(data) {
 //  MODAL
 // ------------------------------------------
 
-
-
-
 function modals() {
 
     const cards = document.querySelectorAll(".card");
@@ -184,6 +183,56 @@ function modals() {
 
 
 };
+
+
+
+// ------------------------------------------
+//  SEARCH BAR
+// ------------------------------------------
+
+const search = document.querySelector(".search-container");
+let search_html = `
+    <form action="#" method="get">
+        <input type="search" id="search-input" class="search-input" placeholder="Search...">
+        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+    </form>
+`;
+
+search.insertAdjacentHTML('beforeend', search_html);
+
+
+
+
+
+function searchBar() {
+    const search_input = document.getElementById("search-input");
+    const search_btn = document.getElementById("search-submit");
+    const employee_name = document.querySelectorAll(".card-name");
+
+    let all_names = document.querySelectorAll(".card-name");
+    let names = [];
+
+    for (var i = 0; i < all_names.length; i++) {
+        names.push(all_names[i].textContent.toLowerCase());
+    }
+    
+    search_btn.addEventListener("click", function() {
+        let search_result = search_input.value.toLowerCase();
+        
+        for (var i = 0; i < employee_name.length; i++) {
+            let single_name = employee_name[i].textContent.toLowerCase();
+            if(single_name.includes(search_result)) {
+                employee_name[i].closest(".card").classList.remove("hidden");
+            } else {
+                employee_name[i].closest(".card").classList.add("hidden");
+            }
+        }
+    });
+}
+
+
+
+
 
 
 
